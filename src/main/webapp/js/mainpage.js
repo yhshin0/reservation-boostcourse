@@ -77,14 +77,14 @@ Promotions.prototype = {
       });
       this.setEvents();
     }.bind(this));
-    oReq.open("GET", "http://localhost:8080/booking/promotions");
+    oReq.open("GET", "./promotions");  //상대경로로 http://localhost:8080/booking/promotions 와 같은 경로로 감.
     oReq.send();
   },
   
   setEvents : function(){
     this.setCarousels();
-    this.nxt_e.addEventListener("click", function(){ this.moveNext();}.bind(this));
-    this.prev_e.addEventListener("click",function(){ this.movePrev();}.bind(this));
+    //this.nxt_e.addEventListener("click", function(){ this.moveNext();}.bind(this));
+    //this.prev_e.addEventListener("click",function(){ this.movePrev();}.bind(this));
     setInterval(() => {
     	this.moveNext();
     },2500);
@@ -115,7 +115,7 @@ Categories.prototype = {
       });
       Products.getProducts('',0);
     });
-    oReq.open("GET", "http://localhost:8080/booking/categories");
+    oReq.open("GET", "./categories");
     oReq.send();
   },
   
@@ -179,7 +179,7 @@ var Products = {
       }
 
     });
-    oReq.open("GET", "http://localhost:8080/booking/products?start="+start+"&categoryId="+categoryId);
+    oReq.open("GET", "./products?start="+start+"&categoryId="+categoryId);
     oReq.send();
   }
 }

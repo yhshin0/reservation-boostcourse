@@ -7,16 +7,7 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
 	<title>네이버 예약</title>
 	<link href="./css/style.css" rel="stylesheet">
-	<style>
-		.group_visual .visual_img .item {
-	    transition-property: left;
-	    transition-duration: 1s;
-	    left:0px;
-	  }
-		.container_visual {
-			height: 414px;
-		}
-	</style>
+	<link href="./css/detail.css" rel="stylesheet">
 </head>
 <body>
 	<!-- start container -->

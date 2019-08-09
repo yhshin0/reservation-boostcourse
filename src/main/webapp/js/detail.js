@@ -16,7 +16,7 @@ ProductDetail.prototype = {
       this.getInfoBox(result);
       this.getDescription(result.displayInfo.productContent);
     }.bind(this));
-    oReq.open("GET", "http://localhost:8080/booking/products/"+displayInfoId);
+    oReq.open("GET", "./products/"+displayInfoId);
     oReq.send();
   },
   

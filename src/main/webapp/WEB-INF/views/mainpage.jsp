@@ -9,20 +9,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
     <title>네이버 예약</title>
     <link href="./css/style.css" rel="stylesheet">
-    <style>
-    	.event .section_visual .group_visual .container_visual .visual_img .item {
-		    width: 100%;
-		    transition-property: left;
-		    transition-duration: 1s;
-		    left:0px;
-	    }
-	    .event .section_visual .group_visual .container_visual .prev_e {
-	    	right: 91.6%;
-	    }
-	    .event .section_visual .group_visual .container_visual .nxt_e {
-	    	left: 91.6%;
-	    }
-    </style>
+    <link href="./css/mainpage.css" rel="stylesheet">
 </head>
 
 <body>
@@ -44,7 +31,7 @@
             <div class="section_visual">
                 <div class="group_visual">
                     <div class="container_visual">
-                        <div class="prev_e">
+                        <!-- <div class="prev_e">
                             <div class="prev_inn">
                                 <a href="#" class="btn_pre_e" title="이전"> <i class="spr_book_event spr_event_pre">이전</i> </a>
                             </div>
@@ -53,7 +40,7 @@
                             <div class="nxt_inn">
                                 <a href="#" class="btn_nxt_e" title="다음"> <i class="spr_book_event spr_event_nxt">다음</i> </a>
                             </div>
-                        </div>
+                        </div> -->
                         <div>
                             <div class="container_visual">
                                 <!-- [D] 이전,다음 버튼을 클릭할때마다 캐러셀 형태로 순환 됨 -->
@@ -118,14 +105,13 @@
     <script type="text/javascript" src="./js/mainpage.js"></script>
 
     <script type="rv-template" id="promotionItem">
-    <li class="item" style="background-image: url({{productImageUrl}});">
-        <a href="#"> <span class="img_btm_border"></span> <span class="img_right_border"></span> <span class="img_bg_gra"></span>
-            <div class="event_txt">
-                <h4 class="event_txt_tit"></h4>
-                <p class="event_txt_adr"></p>
-                <p class="event_txt_dsc"></p>
-            </div>
-        </a>
+    <li class="item" style="background-image: url({{productImageUrl}}); ">
+        <span class="img_btm_border"></span> <span class="img_right_border"></span> <span class="img_bg_gra"></span>
+        <div class="event_txt">
+            <h4 class="event_txt_tit"></h4>
+            <p class="event_txt_adr"></p>
+            <p class="event_txt_dsc"></p>
+        </div>
     </li>
     </script>
 		<script type="rv-template" id="categoryList">

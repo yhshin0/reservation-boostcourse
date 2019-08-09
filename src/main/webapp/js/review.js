@@ -12,7 +12,7 @@ ReviewPage.prototype = {
       this.getAverageGrade(result);
       this.getReviewItem(result);
     }.bind(this));
-    oReq.open("GET", "http://localhost:8080/booking/products/"+displayInfoId);
+    oReq.open("GET", "./products/"+displayInfoId);
     oReq.send();
   },
   

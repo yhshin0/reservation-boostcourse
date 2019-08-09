@@ -1,0 +1,15 @@
+.event .section_visual .group_visual .container_visual .visual_img .item {
+  width: 100%;
+  transition-property: left;
+  transition-duration: 1s;
+  left:0px;
+}
+.event .section_visual .group_visual .container_visual .prev_e {
+	right: 91.6%;
+}
+.event .section_visual .group_visual .container_visual .nxt_e {
+	left: 91.6%;
+}
+#container > div.event > div.section_visual > div > div > div > div > ul {
+  cursor: default;
+}

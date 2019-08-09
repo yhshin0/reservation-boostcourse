@@ -1,0 +1,8 @@
+.group_visual .visual_img .item {
+   transition-property: left;
+   transition-duration: 1s;
+   left:0px;
+ }
+.container_visual {
+	height: 414px;
+}
