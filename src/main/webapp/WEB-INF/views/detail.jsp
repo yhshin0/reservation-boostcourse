@@ -176,11 +176,6 @@
 											<li class="in_img_lst"><img alt="" class="img_thumb" src="https://ssl.phinf.net/naverbooking/20170131_238/14858250829398Pnx6_JPEG/%B0%F8%C1%F6%BB%E7%C7%D7.jpg?type=a1000"></li>
 										</ul>
 									</li>
-									<!-- <li class="detail_info_lst"> <strong class="in_tit">[공연정보]</strong>
-                         <ul class="in_img_group">
-                             <li class="in_img_lst"> <img alt="" class="img_thumb" src="https://ssl.phinf.net/naverbooking/20170131_255/1485825099482NmYMe_JPEG/%B0%F8%BF%AC%C1%A4%BA%B8.jpg?type=a1000"> </li>
-                         </ul>
-                       </li> -->
 								</ul>
 							</div>
 						</div>

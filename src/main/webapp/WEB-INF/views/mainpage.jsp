@@ -31,16 +31,6 @@
             <div class="section_visual">
                 <div class="group_visual">
                     <div class="container_visual">
-                        <!-- <div class="prev_e">
-                            <div class="prev_inn">
-                                <a href="#" class="btn_pre_e" title="이전"> <i class="spr_book_event spr_event_pre">이전</i> </a>
-                            </div>
-                        </div>
-                        <div class="nxt_e">
-                            <div class="nxt_inn">
-                                <a href="#" class="btn_nxt_e" title="다음"> <i class="spr_book_event spr_event_nxt">다음</i> </a>
-                            </div>
-                        </div> -->
                         <div>
                             <div class="container_visual">
                                 <!-- [D] 이전,다음 버튼을 클릭할때마다 캐러셀 형태로 순환 됨 -->

@@ -77,14 +77,12 @@ Promotions.prototype = {
       });
       this.setEvents();
     }.bind(this));
-    oReq.open("GET", "./promotions");  //상대경로로 http://localhost:8080/booking/promotions 와 같은 경로로 감.
+    oReq.open("GET", "./promotions");
     oReq.send();
   },
   
   setEvents : function(){
     this.setCarousels();
-    //this.nxt_e.addEventListener("click", function(){ this.moveNext();}.bind(this));
-    //this.prev_e.addEventListener("click",function(){ this.movePrev();}.bind(this));
     setInterval(() => {
     	this.moveNext();
     },2500);
