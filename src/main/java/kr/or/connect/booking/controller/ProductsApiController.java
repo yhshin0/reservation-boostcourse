@@ -20,13 +20,8 @@ public class ProductsApiController {
   public Map<String, Object> productList(@RequestParam(name="categoryId", required=false) Integer categoryId,
                                          @RequestParam(name="start", required=false, defaultValue="0") int start) {
     Map<String, Object> map = new HashMap<String, Object>();
-    if (categoryId != null) {
-      map.put("totalCount", productsService.getCountByCategoryId(categoryId));
-      map.put("items", productsService.getItemsByCategoryId(categoryId, start));
-    } else {
-      map.put("totalCount", productsService.getAllCount());
-      map.put("items", productsService.getAllItems(start));
-    }
+    map.put("totalCount", productsService.getCount(categoryId));
+    map.put("items", productsService.getItems(categoryId, start));
     return map;
   }
   

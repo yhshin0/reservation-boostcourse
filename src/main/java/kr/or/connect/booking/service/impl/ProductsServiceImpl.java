@@ -34,24 +34,15 @@ public class ProductsServiceImpl implements ProductsService{
   @Autowired
   private ProductPriceDisplayInfoDao productPriceDisplayInfoDao; 
   
-
   @Override
-  public List<ProductListInfo> getAllItems(Integer start) {
-    return productListInfoDao.selectAll(start, LIMIT);
-  }
-
-  @Override
-  public List<ProductListInfo> getItemsByCategoryId(Integer categoryId, Integer start) {
+  public List<ProductListInfo> getItems(Integer categoryId, Integer start) {
+    if(categoryId == null) return productListInfoDao.selectAll(start, LIMIT); 
     return productListInfoDao.selectByCategoryId(categoryId, start, LIMIT);
   }
 
   @Override
-  public int getAllCount() {
-    return productListInfoDao.countAll();
-  }
-
-  @Override
-  public int getCountByCategoryId(Integer categoryId) {
+  public int getCount(Integer categoryId) {
+    if(categoryId == null) return productListInfoDao.countAll(); 
     return productListInfoDao.countByCategoryId(categoryId);
   }
 
