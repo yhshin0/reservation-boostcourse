@@ -14,7 +14,7 @@ import kr.or.connect.booking.service.ProductsService;
 @RequestMapping("/products")
 public class ProductsApiController {
   @Autowired
-  ProductsService productsService;
+  private ProductsService productsService;
   
   @GetMapping
   public Map<String, Object> productList(@RequestParam(name="categoryId", required=false) Integer categoryId,

@@ -11,7 +11,7 @@ import kr.or.connect.booking.service.PromotionsService;
 public class PromotionsServiceImpl implements PromotionsService{
   
   @Autowired
-  PromotionThumbnailDao promotionThumbnailDao;
+  private PromotionThumbnailDao promotionThumbnailDao;
   
   @Override
   public List<PromotionThumbnail> getItems() {

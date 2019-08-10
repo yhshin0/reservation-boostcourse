@@ -20,19 +20,19 @@ import kr.or.connect.booking.service.ProductsService;
 public class ProductsServiceImpl implements ProductsService{
 
   @Autowired
-  ProductListInfoDao productListInfoDao;
+  private ProductListInfoDao productListInfoDao;
   @Autowired
-  ProductDisplayInfoDao productDisplayInfoDao;
+  private ProductDisplayInfoDao productDisplayInfoDao;
   @Autowired
-  ProductImageDao productImageDao;
+  private ProductImageDao productImageDao;
   @Autowired
-  ProductDisplayInfoImageDao productDisplayInfoImageDao;
+  private ProductDisplayInfoImageDao productDisplayInfoImageDao;
   @Autowired
-  CommentReservationInfoDao commentReservationInfoDao;
+  private CommentReservationInfoDao commentReservationInfoDao;
   @Autowired
-  CommentImageFileInfoDao commentImageFileInfoDao;
+  private CommentImageFileInfoDao commentImageFileInfoDao;
   @Autowired
-  ProductPriceDisplayInfoDao productPriceDisplayInfoDao; 
+  private ProductPriceDisplayInfoDao productPriceDisplayInfoDao; 
   
 
   @Override
@@ -67,7 +67,7 @@ public class ProductsServiceImpl implements ProductsService{
     return map;
   }
   
-  public List<CommentReservationInfo> getCommentImage(List<CommentReservationInfo> comments) {
+  private List<CommentReservationInfo> getCommentImage(List<CommentReservationInfo> comments) {
     for (CommentReservationInfo comment : comments) {
       comment.setCommentImages(commentImageFileInfoDao.selectImages(comment.getCommentId()));
     }

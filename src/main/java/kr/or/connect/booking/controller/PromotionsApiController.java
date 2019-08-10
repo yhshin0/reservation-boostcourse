@@ -13,7 +13,7 @@ import kr.or.connect.booking.service.PromotionsService;
 public class PromotionsApiController {
   
   @Autowired
-  PromotionsService promotionsService;
+  private PromotionsService promotionsService;
   
   @GetMapping
   public Map<String, Object> getItems() {

@@ -12,7 +12,7 @@ import kr.or.connect.booking.service.CategoriesService;
 @RequestMapping(path="/categories")
 public class CategoriesApiController {
   @Autowired
-  CategoriesService categoriesService;
+  private CategoriesService categoriesService;
   
   @GetMapping
   public Map<String, Object> list(){

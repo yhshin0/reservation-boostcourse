@@ -11,7 +11,7 @@ import kr.or.connect.booking.service.CategoriesService;
 public class CategoriesServiceImpl implements CategoriesService{
 
   @Autowired
-  CategoryDetailDao categoryDetailDao;
+  private CategoryDetailDao categoryDetailDao;
   
   @Override
   public List<CategoryDetail> getItems() {
