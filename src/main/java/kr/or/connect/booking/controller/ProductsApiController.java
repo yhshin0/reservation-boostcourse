@@ -1,5 +1,6 @@
 package kr.or.connect.booking.controller;
 
+import java.util.HashMap;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,13 +17,12 @@ public class ProductsApiController {
   private ProductsService productsService;
   
   @GetMapping
-  public ProductList productList(@RequestParam(name="categoryId", required=false) Integer categoryId,
+  public Map<String, Object> productList(@RequestParam(name="categoryId", required=false) Integer categoryId,
                                          @RequestParam(name="start", required=false, defaultValue="0") int start) {
-    ProductList productList = new ProductList();
-    productList.setItems(productsService.getItems(categoryId, start));
-    productList.setTotalCount(productsService.getCount(categoryId));
-    
-    return productList;
+    Map<String, Object> map = new HashMap<String, Object>();
+    map.put("totalCount", productsService.getCount(categoryId));
+    map.put("items", productsService.getItems(categoryId, start));
+    return map;
   }
   
   @GetMapping("/{displayInfoId}")
