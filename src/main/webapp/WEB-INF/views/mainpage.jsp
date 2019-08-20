@@ -18,10 +18,17 @@
         <div class="header">
             <header class="header_tit">
                 <h1 class="logo">
-                    <a href="https://m.naver.com/" class="lnk_logo" title="네이버"> <span class="spr_bi ico_n_logo">네이버</span> </a>
+                    <a href="/booking/" class="lnk_logo" title="네이버"> <span class="spr_bi ico_n_logo">네이버</span> </a>
                     <a class="lnk_logo" title="예약" href="/booking/"> <span class="spr_bi ico_bk_logo">예약</span> </a>
                 </h1>
-                <a href="bookinglogin" class="btn_my"> <span class="viewReservation" title="예약확인">예약확인</span> </a>
+                <c:choose>
+                  <c:when test="${reservationEmail ne null }">
+                		<a href="./myreservation?reservationEmail=${reservationEmail }" class="btn_my"> <span class="viewReservation" title="예약확인">${reservationEmail }</span> </a>
+               		</c:when>
+               		<c:otherwise>
+                		<a href="./bookinglogin" class="btn_my"> <span class="viewReservation" title="예약확인">예약확인</span> </a>
+               		</c:otherwise>
+                </c:choose>
             </header>
         </div>
         <hr>

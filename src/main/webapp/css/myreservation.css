@@ -1,0 +1,23 @@
+article div.card_body > div.middle > div ul > li > em{
+    height: 19px;
+    overflow: hidden;
+    word-wrap: break-word;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    display: -webkit-box!important
+}
+
+div.logout {
+	  text-align: center;
+    padding-bottom: 10px;
+    padding-top: 5px;
+}
+
+div.logout > a {
+	  padding: 5px 10px;
+    border: 1px solid #d9d9d9;
+    background-color: white;
+    color: #696a6c;
+    font-size: 0.9em;
+}

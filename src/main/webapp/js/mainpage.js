@@ -1,4 +1,4 @@
-function Promotions () {
+function GetPromotions () {
   this.isCompleted = true;
 	this.transitionComplete = function(){
 		this.isCompleted = true;
@@ -11,7 +11,7 @@ function Promotions () {
   this.sendAjax();
 }
 
-Promotions.prototype = {
+GetPromotions.prototype = {
   //carousel 설정
   setCarousels : function() {
     this.carousel_items = document.querySelectorAll(".event .section_visual .group_visual .container_visual .container_visual .visual_img .item");
@@ -89,12 +89,12 @@ Promotions.prototype = {
   }
 }
 
-function Categories() {
+function GetCategories() {
   this.getCategories();
   this.registerEvent();
 }
 
-Categories.prototype = {
+GetCategories.prototype = {
   //카테고리 조회
   getCategories : function(){
     var oReq = new XMLHttpRequest();
@@ -191,7 +191,7 @@ var clickMore = function(){
 
 
 document.addEventListener("DOMContentLoaded", function(){
-	var promotions = new Promotions();
-	var categories = new Categories();
+	var promotions = new GetPromotions();
+	var categories = new GetCategories();
 	clickMore();
 });

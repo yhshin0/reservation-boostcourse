@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
 	<meta charset="utf-8">
@@ -12,28 +13,23 @@
 <body>
 	<!-- start container -->
 	<div id="container">
-		<!-- start header fade -->
-		<div class="header fade">
-			<header class="header_tit">
-				<h1 class="logo">
-					<a href="mainpage" class="lnk_logo" title="네이버"> <span class="spr_bi ico_n_logo">네이버</span> </a>
-					<a href="mainpage" class="lnk_logo" title="예약"> <span class="spr_bi ico_bk_logo">예약</span> </a>
-				</h1>
-				<a href="#" class="btn_my"> <span title="예약확인">예약확인</span>
-				</a>
-			</header>
-		</div>
-		<!-- end header fade -->
 		<div class="ct main">
 			<div>
 				<div class="section_visual">
 					<!-- start header -->
 					<header>
 						<h1 class="logo">
-							<a href="mainpage" class="lnk_logo" title="네이버"> <span class="spr_bi ico_n_logo">네이버</span> </a>
-							<a href="mainpage" class="lnk_logo" title="예약"> <span class="spr_bi ico_bk_logo">예약</span> </a>
+							<a href="./mainpage" class="lnk_logo" title="네이버"> <span class="spr_bi ico_n_logo">네이버</span> </a>
+							<a href="./mainpage" class="lnk_logo" title="예약"> <span class="spr_bi ico_bk_logo">예약</span> </a>
 						</h1>
-						<a href="myreservation" class="btn_my"> <span class="viewReservation" title="예약확인">예약확인</span> </a>
+          <c:choose>
+            <c:when test="${reservationEmail ne null }">
+          		<a href="./myreservation?reservationEmail=${reservationEmail }" class="btn_my"> <span class="viewReservation" title="예약확인">${reservationEmail }</span> </a>
+         		</c:when>
+         		<c:otherwise>
+          		<a href="./bookinglogin" class="btn_my"> <span class="viewReservation" title="예약확인">예약확인</span> </a>
+         		</c:otherwise>
+          </c:choose>
 					</header>
 					<!-- end header -->
 					<!-- start page -->
@@ -115,9 +111,11 @@
 				<!-- end event -->
 				<!-- start reservation -->
 				<div class="section_btn">
+					  <a href="reserve?displayInfoId=${displayInfoId }">
 					<button type="button" class="bk_btn">
-						<i class="fn fn-nbooking-calender2"></i> <span>예매하기</span>
+						  <i class="fn fn-nbooking-calender2"></i> <span>예매하기</span>
 					</button>
+						</a>
 				</div>
 				<!-- end reservation -->
 				<!-- start review_list -->
@@ -173,7 +171,7 @@
 									<li class="detail_info_lst">
 									  <strong class="in_tit">[공지사항]</strong>
 										<ul class="in_img_group">
-											<li class="in_img_lst"><img alt="" class="img_thumb" src="https://ssl.phinf.net/naverbooking/20170131_238/14858250829398Pnx6_JPEG/%B0%F8%C1%F6%BB%E7%C7%D7.jpg?type=a1000"></li>
+											<li class="in_img_lst"><img alt="공지사항" class="img_thumb" src="https://ssl.phinf.net/naverbooking/20170131_238/14858250829398Pnx6_JPEG/%B0%F8%C1%F6%BB%E7%C7%D7.jpg?type=a1000"></li>
 										</ul>
 									</li>
 								</ul>
@@ -211,7 +209,7 @@
 	<script type="text/javascript" src="./js/detail.js"></script>
 	<script type="rv-template" id="imageItem">
 		<li class="item" style="width: 414px; height: 414px;">
-			<img alt="" class="img_thumb" src="{{saveFileName}}"> <span class="img_bg"></span>
+			<img alt="상품이미지" class="img_thumb" src="{{saveFileName}}"> <span class="img_bg"></span>
 			<div class="visual_txt">
 				<div class="visual_txt_inn">
 				<h2 class="visual_txt_tit">

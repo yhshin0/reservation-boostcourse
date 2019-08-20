@@ -1,8 +1,8 @@
-function ReviewPage() {
+function GetReviewPage() {
   this.sendAjax();
 }
 
-ReviewPage.prototype = {
+GetReviewPage.prototype = {
   //review 목록 조회
   sendAjax : function(){
     var displayInfoId = location.href.substr(location.href.lastIndexOf("=")+1);
@@ -53,5 +53,5 @@ ReviewPage.prototype = {
 }
 
 document.addEventListener("DOMContentLoaded", function(){
-  var reviewPage = new ReviewPage();
+  var reviewPage = new GetReviewPage();
 });

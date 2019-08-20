@@ -34,16 +34,18 @@ public class ProductsServiceImpl implements ProductsService{
   @Autowired
   private ProductPriceDisplayInfoDao productPriceDisplayInfoDao; 
   
+  
   @Override
-  public List<ProductListInfo> getItems(Integer categoryId, Integer start) {
-    if(categoryId == null) return productListInfoDao.selectAll(start, LIMIT); 
-    return productListInfoDao.selectByCategoryId(categoryId, start, LIMIT);
-  }
-
-  @Override
-  public int getCount(Integer categoryId) {
-    if(categoryId == null) return productListInfoDao.countAll(); 
-    return productListInfoDao.countByCategoryId(categoryId);
+  public Map<String, Object> productList(Integer categoryId, Integer start) {
+    Map<String, Object> map = new HashMap<String, Object>();
+    if(categoryId == null) {
+      map.put("totalCount", productListInfoDao.countAll());
+      map.put("items", productListInfoDao.selectAll(start, LIMIT));
+    } else {
+      map.put("totalCount", productListInfoDao.countByCategoryId(categoryId));
+      map.put("items", productListInfoDao.selectByCategoryId(categoryId, start, LIMIT));
+    }
+    return map;
   }
 
   @Override

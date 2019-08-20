@@ -1,9 +1,9 @@
-function ProductDetail() {
+function GetProductDetail() {
   this.sendAjax();
   this.registerEvents();
 }
 
-ProductDetail.prototype = {
+GetProductDetail.prototype = {
   
   sendAjax : function() {
     var displayInfoId = location.href.substr(location.href.lastIndexOf("=")+1);
@@ -23,7 +23,9 @@ ProductDetail.prototype = {
   
   //이미지 조회
   getImages : function(responseText) {
-    var template = document.querySelector("#imageItem").innerHTML;
+		// carousel 적용 및 관련 버튼 UI를 표시하기 위한 이미지 개수
+		const countForCarousel = 2;
+		var template = document.querySelector("#imageItem").innerHTML;
     var imageItems = document.querySelector(".group_visual .container_visual .visual_img.detail_swipe");
     imageItems.innerHTML = '';
     var bindTemplate = Handlebars.compile(template);
@@ -36,12 +38,12 @@ ProductDetail.prototype = {
       imageItems.innerHTML += resultHTML;
     });
 
-    //2개일 때만 carousel 적용
-    if(responseText.productImages.length == 2) {
-      document.querySelector("span.num.off>span").innerText=2;
+		// 이미지 개수가 위에서 정의한 countForCarousel와 일치할 때
+		if (responseText.productImages.length == countForCarousel) {
+			document.querySelector("span.num.off>span").innerText = responseText.productImages.length;
       document.querySelector("div.group_visual .container_visual").nextElementSibling.classList.remove("hide");
       document.querySelector("div.group_visual .container_visual").nextElementSibling.nextElementSibling.classList.remove("hide");
-      var visualImages = new VisualImages();
+      var visualImages = new GetVisualImages();
     }
   },
 			
@@ -130,7 +132,7 @@ ProductDetail.prototype = {
   }
 }
 
-function VisualImages () {
+function GetVisualImages () {
   this.isCompleted = true;
   this.transitionComplete = function(){
     this.isCompleted = true;
@@ -144,7 +146,7 @@ function VisualImages () {
   this.registerEvents();
 }
 
-VisualImages.prototype = {
+GetVisualImages.prototype = {
   //carousel 설정
   setCarousels : function(){
     document.querySelectorAll("ul.visual_img>li.item").forEach(function(obj){
@@ -206,5 +208,5 @@ VisualImages.prototype = {
 }
 
 document.addEventListener("DOMContentLoaded", function(){
-	var productDetail = new ProductDetail();
+	var productDetail = new GetProductDetail();
 });
