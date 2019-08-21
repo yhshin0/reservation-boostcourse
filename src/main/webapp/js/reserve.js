@@ -183,8 +183,7 @@ GetReservePage.prototype = {
 			//예약하기 버튼 클릭 시
 			document.querySelector("#container > div.ct > div > div.box_bk_btn > div > button").addEventListener("click", function(){
 				if(parseInt(nameCheck.value) + parseInt(telCheck.value) + parseInt(emailCheck.value) + parseInt(chk3Check.value)%2 !== 4) return;
-				alert('ge');
-				//this.sendData();
+				this.sendData();
 			}.bind(this));
 		},
 		
