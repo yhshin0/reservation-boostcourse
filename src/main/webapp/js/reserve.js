@@ -19,6 +19,7 @@ GetReservePage.prototype = {
 			oReq.send();
 		},
 		
+		//상품 정보 출력
 		getDisplayInfo : function(responseText) {
 			var template = document.querySelector("#displayInfo").innerHTML;
 			var bindTemplate = Handlebars.compile(template);
@@ -36,6 +37,7 @@ GetReservePage.prototype = {
 			location.insertAdjacentHTML("afterend",resultHTML);
 		},
 		
+		//최저 가격
 		getMinimumPrice : function(productPrices) {
 			var min = Number.MAX_SAFE_INTEGER;
 			productPrices.forEach(function(obj){
@@ -44,6 +46,7 @@ GetReservePage.prototype = {
 			return min;
 		},
 		
+		//티켓 가격 출력
 		getPriceInfo : function(productPrices){
 			var template = document.querySelector("#priceInfo").innerText;
 			var bindTemplate = Handlebars.compile(template);
@@ -54,6 +57,7 @@ GetReservePage.prototype = {
 			location.innerHTML = resultHTML;
 		},
 		
+		//상품 가격 정보 공간의 버튼 이벤트 등록
 		registerPriceButtonEvents : function(){
 			
 			//input value 초기화
@@ -71,6 +75,7 @@ GetReservePage.prototype = {
 					}
 					count.value++;
 					this.checkCount(count.value, btn);
+					this.toggleReserveButton();
 				}.bind(this));
 			}.bind(this));
 			
@@ -84,10 +89,12 @@ GetReservePage.prototype = {
 					}
 					count.value--;
 					this.checkCount(count.value, btn);
+					this.toggleReserveButton();
 				}.bind(this));
 			}.bind(this));
 		},
 		
+		//티켓 count 확인
 		checkCount : function(count, btn){
 			if(count == this.itemMaximumCount) {
 				btn.parentElement.querySelector("input").classList.add("disabled");
@@ -111,19 +118,21 @@ GetReservePage.prototype = {
 			this.calPrice(price, count, btn);
 		},
 		
+		//선택한 티켓 가격 계산
 		calPrice : function(price, count, btn){
 			btn.closest("div.count_control").querySelector("span.total_price").innerText = price*count;
 		},
 		
+		//예약일 랜덤 지정
 		getReserveTime : function(){
 			var year = new Date().getFullYear();
 			var month = new Date().getMonth()+1;
 			var date = new Date().getDate() + Math.floor(Math.random()*5) + 1;
 			var reserveTime = year + '.' + month + '.' + date + '.';
-			//document.querySelector("div.inline_form.last>div.inline_control>p.inline_txt.selected").insertAdjacentHTML("afterbegin", reserveTime);
 			document.querySelector("#reservationDate").innerText = reserveTime;
 		},
 		
+		//이벤트 등록
 		registerEvents : function(){
 			var name = document.querySelector("#name");
 			var tel = document.querySelector("#tel");
@@ -137,65 +146,88 @@ GetReservePage.prototype = {
 			var agree1 = document.querySelector("#container > div.ct > div > div.section_booking_form > div.section_booking_agreement > div:nth-child(2) > a");
 			var agree2 = document.querySelector("#container > div.ct > div > div.section_booking_form > div.section_booking_agreement > div:nth-child(3) > a");
 			
-			name.addEventListener("change", function(){
-				nameCheck.value = 0;
-				if(name.value.match(/^[a-zA-Z가-힣]{2,}$/) !== null) {
-					nameCheck.value = 1;
-				} else {
-					setTimeout(()=>name.nextElementSibling.style.visibility="hidden",1000);
-					name.nextElementSibling.style.visibility = "visible";
-				}
-				this.toggleReserveButton(nameCheck.value, telCheck.value, emailCheck.value, chk3Check.value);
+			
+			/*
+			 * (3) blur, focus
+			 * - focus는 엘리먼트에 포커스가 생겼을 때(input의 text 프로퍼티 테두리 내부를 클릭했을때), blur은 포커스가 사라졌을 때 발생(input의 text 프로퍼티 테두리 외부를 클릭했을 때)하는 이벤트다.
+			 * - 다음 태그를 제외한 모든 태그에서 발생한다. <base>, <bdo>, <br>, <head>, <html>, <iframe>, <meta>, <param>, <script>, <style>, <title>
+			 * 출처: https://devbox.tistory.com/entry/JavaScript-이벤트-타입 [장인개발자를 꿈꾸는 :: 기록하는 공간]
+			 * 
+			 * */
+			name.addEventListener("blur", function(){
+				var regExp = /^[a-zA-Z가-힣]{2,}$/;
+				this.checkValidation(name, regExp, nameCheck);
+				this.toggleReserveButton();
 			}.bind(this));
 			
-			tel.addEventListener("change", function(){
-				telCheck.value = 0;
-				if(tel.value.match(/^01[16789]-[0-9]{3,4}-[0-9]{4}$|^010-[0-9]{4}-[0-9]{4}$/) !== null) {
-					telCheck.value = 1;
-				} else {
-					setTimeout(()=>tel.nextElementSibling.style.visibility="hidden",1000);
-					tel.nextElementSibling.style.visibility = "visible";
-				}
-				this.toggleReserveButton(nameCheck.value, telCheck.value, emailCheck.value, chk3Check.value);
+			tel.addEventListener("blur", function(){
+				var regExp = /^(02|03[1-3]|04[1-4]|05[1-5]|06[1-4])-\d{3,4}-\d{4}$|^01[16789]-[0-9]{3,4}-[0-9]{4}$|^010-[0-9]{4}-[0-9]{4}$/;
+				this.checkValidation(tel, regExp, telCheck);
+				this.toggleReserveButton();
 			}.bind(this));
 			
-			email.addEventListener("change", function(){
-				emailCheck.value = 0;
-				if(email.value.match(/^[A-Za-z0-9_-]+@[A-Za-z0-9]+\.[a-z]{1,2}\.[a-z]{1,2}$|^[A-Za-z0-9_-]+@[A-Za-z0-9]+\.[a-z]{3}$/) !== null) {
-					emailCheck.value=1;
-				} else {
-					setTimeout(()=>email.nextElementSibling.style.visibility="hidden",1000);
-					email.nextElementSibling.style.visibility = "visible";
-				}
-				this.toggleReserveButton(nameCheck.value, telCheck.value, emailCheck.value, chk3Check.value);
+			email.addEventListener("blur", function(){
+				var regExp = /^[A-Za-z0-9_-]+@[A-Za-z0-9]+\.[a-z]{1,2}\.[a-z]{1,2}$|^[A-Za-z0-9_-]+@[A-Za-z0-9]+\.[a-z]{3}$/;
+				this.checkValidation(email, regExp, emailCheck);
+				this.toggleReserveButton();
 			}.bind(this));
 			
 			chk3.addEventListener("change", function(){
 				chk3Check.value++;
-				this.toggleReserveButton(nameCheck.value, telCheck.value, emailCheck.value, chk3Check.value);
+				this.toggleReserveButton();
 			}.bind(this));
 			
-			agree1.addEventListener("click", ()=>{agree1.parentElement.classList.toggle("open");});
-			agree2.addEventListener("click", ()=>{agree2.parentElement.classList.toggle("open");});
+			agree1.addEventListener("click", ()=>{this.toggleAgreement(agree1);});
+			agree2.addEventListener("click", ()=>{this.toggleAgreement(agree2);});
 			
+			//예약하기 버튼 클릭 시
 			document.querySelector("#container > div.ct > div > div.box_bk_btn > div > button").addEventListener("click", function(){
 				if(parseInt(nameCheck.value) + parseInt(telCheck.value) + parseInt(emailCheck.value) + parseInt(chk3Check.value)%2 !== 4) return;
-				if(document.querySelector("#totalCount").innerText == 0) {
-					alert("상품을 선택해 주세요");
-					return;
-				}
-				this.sendData();
+				alert('ge');
+				//this.sendData();
 			}.bind(this));
 		},
 		
-		toggleReserveButton : function(nameValue, telValue, emailValue, chk3Value){
-			if(parseInt(nameValue) + parseInt(telValue) + parseInt(emailValue) + parseInt(chk3Value)%2 === 4) {
+		//이용약관 펼치기/접기
+		toggleAgreement : function(agreement) {
+			if(agreement.parentElement.classList.toggle("open")) { //펼쳐질 때
+				agreement.firstElementChild.innerText = "접기";
+				agreement.lastElementChild.className = "fn fn-up2";
+				
+			} else {
+				agreement.firstElementChild.innerText = "보기";
+				agreement.lastElementChild.className = "fn fn-down2";
+			};
+		},
+		
+		//예약하기 버튼 활성화 및 비활성화
+		toggleReserveButton : function(){
+			var nameValue = document.querySelector("#nameCheck").value;
+			var telValue = document.querySelector("#telCheck").value;
+			var emailValue = document.querySelector("#emailCheck").value;
+			var chk3Value = document.querySelector("#chk3Check").value;
+
+			if(parseInt(nameValue) + parseInt(telValue) + parseInt(emailValue) + parseInt(chk3Value)%2 === 4 && document.querySelector("#totalCount").innerText != 0) {
 				document.querySelector("#container > div.ct > div > div.box_bk_btn > div").classList.remove("disable");
 			} else {
 				document.querySelector("#container > div.ct > div > div.box_bk_btn > div").classList.add("disable");
 			}
 		},
 		
+		//validation 체크
+		checkValidation : function(target, regExp, checkFlag){
+			checkFlag.value = 0;
+			if(target.value.match(regExp) !== null) {
+				checkFlag.value = 1;
+				
+			//형식 오류 메시지 출력
+			} else {
+				setTimeout(()=>target.nextElementSibling.style.visibility="hidden",1000);
+				target.nextElementSibling.style.visibility = "visible";
+			}
+		},
+		
+		//예약정보 전송
 		sendData : function(){
 			var displayInfoId =parseInt(document.querySelector("#displayInfoId").value);
 			var productId = parseInt(document.querySelector("#productId").value);
@@ -205,6 +237,7 @@ GetReservePage.prototype = {
 			var reservationDate = document.querySelector("#reservationDate").innerText;
 			var prices = [];
 			
+			//예약 티켓 정보
 			document.querySelectorAll("div.qty").forEach(function(v){
 				if(v.querySelector("input.count_control_input").value == 0) return;
 		    var obj = {};

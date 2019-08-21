@@ -89,14 +89,14 @@ GetPromotions.prototype = {
   }
 }
 
-function GetCategories() {
-  this.getCategories();
-  this.registerEvent();
+function GetCategories(products) {
+  this.getCategories(products);
+  this.registerEvent(products);
 }
 
 GetCategories.prototype = {
   //카테고리 조회
-  getCategories : function(){
+  getCategories : function(products){
     var oReq = new XMLHttpRequest();
     oReq.addEventListener("load", function(){
       var result = JSON.parse(oReq.responseText);
@@ -111,14 +111,14 @@ GetCategories.prototype = {
       	var resultHTML = bindTemplate(data);
         tabMenu.innerHTML += resultHTML;
       });
-      Products.getProducts('',0);
+      products.getProducts('',0);
     });
     oReq.open("GET", "./categories");
     oReq.send();
   },
   
   //카테고리 탭 클릭시
-  registerEvent : function(){
+  registerEvent : function(products){
     document.querySelector(".event .section_event_tab .event_tab_lst").addEventListener("click", function(evt){
       var box = document.querySelectorAll(".event .section_event_lst .wrap_event_box .lst_event_box");
       box[0].innerHTML = '';
@@ -131,13 +131,18 @@ GetCategories.prototype = {
         obj.className = "anchor active";
       }
       document.querySelector(".event .section_event_lst .wrap_event_box .btn").style.display = 'inherit';
-      Products.getProducts(evt.target.closest("li").getAttribute("data-category"),0);
+      products.getProducts(evt.target.closest("li").getAttribute("data-category"),0);
     });
   }
   
 }
 
-var Products = {
+function GetProducts() {
+	this.registerEvents();
+}
+
+//var Products = {
+GetProducts.prototype = {
   //상품 정보 조회
   getProducts : function(categoryId, start){
     var oReq = new XMLHttpRequest();
@@ -179,19 +184,19 @@ var Products = {
     });
     oReq.open("GET", "./products?start="+start+"&categoryId="+categoryId);
     oReq.send();
-  }
-}
+  },
 
-//더보기 버튼 클릭 시
-var clickMore = function(){
-  document.querySelector(".event .section_event_lst .wrap_event_box .btn").addEventListener("click", function(){
-    Products.getProducts(document.querySelector("a.anchor.active").parentElement.getAttribute("data-category"), document.querySelectorAll(".event .section_event_lst .wrap_event_box .lst_event_box .item").length);
-  });
-};
+	registerEvents : function(){
+		//더보기 버튼 클릭 시
+	  document.querySelector(".event .section_event_lst .wrap_event_box .btn").addEventListener("click", function(){
+	    this.getProducts(document.querySelector("a.anchor.active").parentElement.getAttribute("data-category"), document.querySelectorAll(".event .section_event_lst .wrap_event_box .lst_event_box .item").length);
+	  }.bind(this));
+	}
+}
 
 
 document.addEventListener("DOMContentLoaded", function(){
 	var promotions = new GetPromotions();
-	var categories = new GetCategories();
-	clickMore();
+	var products = new GetProducts();
+	var categories = new GetCategories(products);
 });
