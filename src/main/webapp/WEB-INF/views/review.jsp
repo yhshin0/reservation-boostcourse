@@ -85,7 +85,7 @@
 				<div class="review_area">
 					<div class="thumb_area">
 						{{#if reviewImage}}
-						<a class="thumb" title="이미지 크게 보기"> <img width="90" height="90" class="img_vertical_top" src="{{reviewImage}}" alt="리뷰이미지"/>
+						<a href="download?filePath={{reviewImage}}" class="thumb" title="이미지 크게 보기"> <img width="90" height="90" class="img_vertical_top" src="{{reviewImage}}" alt="리뷰이미지"/>
 						<span class="img_count">{{reviewImageCount}}</span>
 						{{/if}}
 					</div>

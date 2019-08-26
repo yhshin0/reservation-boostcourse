@@ -11,10 +11,10 @@ import kr.or.connect.booking.service.PromotionsService;
 @RestController
 @RequestMapping("/promotions")
 public class PromotionsApiController {
-  
+
   @Autowired
   private PromotionsService promotionsService;
-  
+
   @GetMapping
   public Map<String, Object> getItems() {
     Map<String, Object> map = new HashMap<>();

@@ -16,10 +16,10 @@ import org.springframework.transaction.annotation.TransactionManagementConfigure
 @EnableTransactionManagement
 @PropertySource("classpath:application.properties")
 public class DBConfig implements TransactionManagementConfigurer {
-  
+
   @Autowired
   Environment env;
-  
+
   @Bean
   public DataSource dataSource() {
     BasicDataSource dataSource = new BasicDataSource();
@@ -34,7 +34,7 @@ public class DBConfig implements TransactionManagementConfigurer {
   public PlatformTransactionManager annotationDrivenTransactionManager() {
     return transactionManager();
   }
-  
+
   @Bean
   public PlatformTransactionManager transactionManager() {
     return new DataSourceTransactionManager(dataSource());

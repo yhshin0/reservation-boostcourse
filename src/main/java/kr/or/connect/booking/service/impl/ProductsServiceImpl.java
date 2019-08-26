@@ -13,11 +13,10 @@ import kr.or.connect.booking.dao.ProductImageDao;
 import kr.or.connect.booking.dao.ProductListInfoDao;
 import kr.or.connect.booking.dao.ProductPriceDisplayInfoDao;
 import kr.or.connect.booking.dto.CommentReservationInfo;
-import kr.or.connect.booking.dto.ProductListInfo;
 import kr.or.connect.booking.service.ProductsService;
 
 @Service
-public class ProductsServiceImpl implements ProductsService{
+public class ProductsServiceImpl implements ProductsService {
 
   @Autowired
   private ProductListInfoDao productListInfoDao;
@@ -32,13 +31,13 @@ public class ProductsServiceImpl implements ProductsService{
   @Autowired
   private CommentImageFileInfoDao commentImageFileInfoDao;
   @Autowired
-  private ProductPriceDisplayInfoDao productPriceDisplayInfoDao; 
-  
-  
+  private ProductPriceDisplayInfoDao productPriceDisplayInfoDao;
+
+
   @Override
-  public Map<String, Object> productList(Integer categoryId, Integer start) {
+  public Map<String, Object> getProductList(Integer categoryId, Integer start) {
     Map<String, Object> map = new HashMap<String, Object>();
-    if(categoryId == null) {
+    if (categoryId == null) {
       map.put("totalCount", productListInfoDao.countAll());
       map.put("items", productListInfoDao.selectAll(start, LIMIT));
     } else {
@@ -59,13 +58,13 @@ public class ProductsServiceImpl implements ProductsService{
     map.put("productPrices", productPriceDisplayInfoDao.selectPrices(displayInfoId));
     return map;
   }
-  
+
   private List<CommentReservationInfo> getCommentImage(List<CommentReservationInfo> comments) {
     for (CommentReservationInfo comment : comments) {
       comment.setCommentImages(commentImageFileInfoDao.selectImages(comment.getCommentId()));
     }
     return comments;
   }
-  
+
 
 }

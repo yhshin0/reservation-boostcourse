@@ -8,15 +8,15 @@ import kr.or.connect.booking.dto.PromotionThumbnail;
 import kr.or.connect.booking.service.PromotionsService;
 
 @Service
-public class PromotionsServiceImpl implements PromotionsService{
-  
+public class PromotionsServiceImpl implements PromotionsService {
+
   @Autowired
   private PromotionThumbnailDao promotionThumbnailDao;
-  
+
   @Override
   public List<PromotionThumbnail> getItems() {
     return promotionThumbnailDao.selectAll();
   }
 
-  
+
 }

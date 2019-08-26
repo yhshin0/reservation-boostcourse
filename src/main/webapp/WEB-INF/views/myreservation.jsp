@@ -28,16 +28,16 @@
 					<ul class="summary_board">
 						<li class="item">
 							<!--[D] 선택 후 .on 추가 link_summary_board -->
-							<a href="#" class="link_summary_board on"> <i class="spr_book2 ico_book2"></i> <em class="tit">전체</em> <span class="figure">0</span> </a>
+							<a class="link_summary_board on"> <i class="spr_book2 ico_book2"></i> <em class="tit">전체</em> <span class="figure">0</span> </a>
 						</li>
 						<li class="item">
-							<a href="#" class="link_summary_board"> <i class="spr_book2 ico_book_ss"></i> <em class="tit">예약확정</em> <span class="figure">0</span> </a>
+							<a class="link_summary_board"> <i class="spr_book2 ico_book_ss"></i> <em class="tit">예약확정</em> <span class="figure">0</span> </a>
 						</li>
 						<li class="item">
-							<a href="#" class="link_summary_board"> <i class="spr_book2 ico_check"></i> <em class="tit">이용완료</em> <span class="figure">0</span> </a>
+							<a class="link_summary_board"> <i class="spr_book2 ico_check"></i> <em class="tit">이용완료</em> <span class="figure">0</span> </a>
 						</li>
 						<li class="item">
-							<a href="#" class="link_summary_board"> <i class="spr_book2 ico_back"></i> <em class="tit">취소·환불</em> <span class="figure">0</span> </a>
+							<a class="link_summary_board"> <i class="spr_book2 ico_back"></i> <em class="tit">취소·환불</em> <span class="figure">0</span> </a>
 						</li>
 					</ul>
 				</div>
@@ -166,8 +166,9 @@
   <script type="text/javascript" src="./js/myreservation.js"></script>
   <script type="rv-template" id="reservationArticle">
   <article class="card_item">
-    <a href="#" class="link_booking_details">
+    <a class="link_booking_details">
   	<div class="card_body">
+      <input type="hidden" id="productId" value={{productId}}>
   	  <div class="left"></div>
   	  <div class="middle">
   		<div class="card_detail">
@@ -218,7 +219,7 @@
   	  <div class="right"></div>
   	</div>
     </a>
-    <a href="#" class="fn fn-share1 naver-splugin btn_goto_share" title="공유하기"></a>
+    <a class="fn fn-share1 naver-splugin btn_goto_share" title="공유하기"></a>
   </article>
 	</script>
 	<script type="rv-template" id="cardDescription">

@@ -13,45 +13,64 @@ import kr.or.connect.booking.service.ReservationsService;
 public class BookingController {
   @Autowired
   private ReservationsService reservationsService;
-  
-  @GetMapping(path="/mainpage")
+
+  @GetMapping(path = "/mainpage")
   public String main() {
     return "mainpage";
   }
-  @GetMapping(path="/bookinglogin")
+
+  @GetMapping(path = "/bookinglogin")
   public String bookingLogin() {
     return "bookinglogin";
   }
-  @GetMapping(path="/detail")
-  public String detail(@RequestParam(name="displayInfoId", required=true) int displayInfoId, ModelMap model) {
+
+  @GetMapping(path = "/detail")
+  public String detail(@RequestParam(name = "displayInfoId", required = true) int displayInfoId,
+      ModelMap model) {
     model.addAttribute("displayInfoId", displayInfoId);
     return "detail";
   }
-  @GetMapping(path="/review")
-  public String review(@RequestParam(name="displayInfoId", required=true) int displayInfoId, ModelMap model) {
+
+  @GetMapping(path = "/review")
+  public String review(@RequestParam(name = "displayInfoId", required = true) int displayInfoId,
+      ModelMap model) {
     model.addAttribute("displayInfoId", displayInfoId);
     return "review";
   }
-  @GetMapping(path="/reserve")
-  public String reserve(@RequestParam(name="displayInfoId", required=true) int displayInfoId, ModelMap model) {
+
+  @GetMapping(path = "/reserve")
+  public String reserve(@RequestParam(name = "displayInfoId", required = true) int displayInfoId,
+      ModelMap model) {
     model.addAttribute("displayInfoId", displayInfoId);
     return "reserve";
   }
-  @GetMapping(path="/myreservation")
-  public String myreservation(@RequestParam(name="reservationEmail", required=true) String reservationEmail, ModelMap model,
+
+  @GetMapping(path = "/myreservation")
+  public String myreservation(
+      @RequestParam(name = "reservationEmail", required = true) String reservationEmail,
       HttpSession session, RedirectAttributes redirectAttr) {
-    //url에 잘못된 이메일 주소를 입력하여 접속한 경우
-    if(reservationsService.getReservations(reservationEmail) == null && reservationsService.getReservations(reservationEmail).equals(null)) {
+    // url에 잘못된 이메일 주소를 입력하여 접속한 경우
+    if ((int) reservationsService.getReservations(reservationEmail).get("size") == 0) {
       redirectAttr.addFlashAttribute("message", "wrong");
       return "redirect:bookinglogin";
     }
     session.setAttribute("reservationEmail", reservationEmail);
     return "myreservation";
   }
-  @GetMapping(path="logout")
+
+  @GetMapping(path = "logout")
   public String logout(HttpSession session) {
     session.removeAttribute("reservationEmail");
     return "mainpage";
+  }
+
+  @GetMapping(path = "reviewWrite")
+  public String reviewWrite(
+      @RequestParam(name = "reservationInfoId", required = true) int reservationInfoId,
+      @RequestParam(name = "productId", required = true) int productId, ModelMap model) {
+    model.addAttribute("reservationInfoId", reservationInfoId);
+    model.addAttribute("productId", productId);
+    return "reviewWrite";
   }
 
 }

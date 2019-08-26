@@ -9,17 +9,17 @@ import org.springframework.web.bind.annotation.RestController;
 import kr.or.connect.booking.service.CategoriesService;
 
 @RestController
-@RequestMapping(path="/categories")
+@RequestMapping(path = "/categories")
 public class CategoriesApiController {
   @Autowired
   private CategoriesService categoriesService;
-  
+
   @GetMapping
-  public Map<String, Object> list(){
+  public Map<String, Object> getCategories() {
     Map<String, Object> map = new HashMap<>();
     map.put("items", categoriesService.getItems());
     return map;
   }
-  
+
 
 }

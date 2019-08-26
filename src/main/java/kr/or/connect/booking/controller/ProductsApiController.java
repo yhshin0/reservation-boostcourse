@@ -14,15 +14,16 @@ import kr.or.connect.booking.service.ProductsService;
 public class ProductsApiController {
   @Autowired
   private ProductsService productsService;
-  
+
   @GetMapping
-  public Map<String, Object> productList(@RequestParam(name="categoryId", required=false) Integer categoryId,
-                                         @RequestParam(name="start", required=false, defaultValue="0") Integer start) {
-    return productsService.productList(categoryId, start);
+  public Map<String, Object> getProductList(
+      @RequestParam(name = "categoryId", required = false) Integer categoryId,
+      @RequestParam(name = "start", required = false, defaultValue = "0") Integer start) {
+    return productsService.getProductList(categoryId, start);
   }
-  
+
   @GetMapping("/{displayInfoId}")
-  public Map<String, Object> selectOne(@PathVariable(name="displayInfoId") int displayInfoId){
+  public Map<String, Object> getProduct(@PathVariable(name = "displayInfoId") int displayInfoId) {
     return productsService.getItem(displayInfoId);
   }
 

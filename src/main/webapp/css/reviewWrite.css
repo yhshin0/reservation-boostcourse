@@ -1,0 +1,17 @@
+.bk_btn {
+    display: block;
+    width: 100%;
+    border: 1px solid rgba(0,0,0,.1);
+    background-color: #d1d1d1;
+    cursor: pointer;
+    font-size: 17px;
+    color: #fff;
+    box-sizing: border-box
+}
+.bk_btn:hover {
+	  cursor: default;
+}
+.review_photos_write .item_preview_thumbs .lst_thumb .item {
+    width: 80px;
+    height: 80px;
+}

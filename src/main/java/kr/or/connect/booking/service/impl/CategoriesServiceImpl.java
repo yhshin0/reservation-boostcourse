@@ -8,16 +8,16 @@ import kr.or.connect.booking.dto.CategoryDetail;
 import kr.or.connect.booking.service.CategoriesService;
 
 @Service
-public class CategoriesServiceImpl implements CategoriesService{
+public class CategoriesServiceImpl implements CategoriesService {
 
   @Autowired
   private CategoryDetailDao categoryDetailDao;
-  
+
   @Override
   public List<CategoryDetail> getItems() {
     return categoryDetailDao.selectAll();
   }
 
-  
+
 
 }
