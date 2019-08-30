@@ -17,10 +17,11 @@ import kr.or.connect.booking.interceptor.LogInterceptor;
 @EnableWebMvc
 @ComponentScan(basePackages = {"kr.or.connect.booking.controller"})
 public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
+  private static final int CACHE_PERIOD = 31556926;
 
   @Override
   public void addResourceHandlers(ResourceHandlerRegistry registry) {
-    registry.addResourceHandler("/css/**").addResourceLocations("/css/").setCachePeriod(31556926);
+    registry.addResourceHandler("/css/**").addResourceLocations("/css/").setCachePeriod(CACHE_PERIOD);
     
     /* 
      * 웹 어플리케이션 루트와 클래스 패스에 어떤 jar에서라도 알려진 /META-INF/public-web-resources/ 경로 모두에서
@@ -28,11 +29,11 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
      * registry.addResourceHandler("/resources/**").addResourceLocations("/", "classpath:/META-INF/public-web-resources/");
      * 출처: https://blog.outsider.ne.kr/904
      * */
-    registry.addResourceHandler("/tmp_upload/**").addResourceLocations("file:///c:/tmp_upload/").setCachePeriod(31556926);
-    registry.addResourceHandler("/img/**").addResourceLocations("classpath:img/").setCachePeriod(31556926);
-    registry.addResourceHandler("/img_map/**").addResourceLocations("classpath:img_map/").setCachePeriod(31556926);
-    registry.addResourceHandler("/js/**").addResourceLocations("/js/").setCachePeriod(31556926);
-    registry.addResourceHandler("/font/**").addResourceLocations("/font/").setCachePeriod(31556926);
+    registry.addResourceHandler("/tmp_upload/**").addResourceLocations("file:///c:/tmp_upload/").setCachePeriod(CACHE_PERIOD);
+    registry.addResourceHandler("/img/**").addResourceLocations("classpath:img/").setCachePeriod(CACHE_PERIOD);
+    registry.addResourceHandler("/img_map/**").addResourceLocations("classpath:img_map/").setCachePeriod(CACHE_PERIOD);
+    registry.addResourceHandler("/js/**").addResourceLocations("/js/").setCachePeriod(CACHE_PERIOD);
+    registry.addResourceHandler("/font/**").addResourceLocations("/font/").setCachePeriod(CACHE_PERIOD);
   }
   
   @Override

@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import kr.or.connect.booking.dto.ReservationResponse;
 import kr.or.connect.booking.dto.Reservations;
 import kr.or.connect.booking.service.ReservationsService;
 
@@ -29,7 +29,7 @@ public class ReservationsApiController {
   private ReservationsService reservationsService;
 
   @GetMapping
-  public Map<String, Object> getReservations(
+  public ReservationResponse getReservations(
       @RequestParam(name = "reservationEmail", required = true) String reservationEmail) {
     return reservationsService.getReservations(reservationEmail);
   }

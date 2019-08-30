@@ -1,8 +1,7 @@
 package kr.or.connect.booking.service;
 
-import java.util.List;
-import kr.or.connect.booking.dto.PromotionThumbnail;
+import kr.or.connect.booking.dto.PromotionResponse;
 
 public interface PromotionsService {
-  public List<PromotionThumbnail> getItems();
+  public PromotionResponse getPromotions();
 }

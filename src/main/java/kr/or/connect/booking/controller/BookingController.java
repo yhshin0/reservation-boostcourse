@@ -1,5 +1,7 @@
 package kr.or.connect.booking.controller;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -42,6 +44,12 @@ public class BookingController {
   public String reserve(@RequestParam(name = "displayInfoId", required = true) int displayInfoId,
       ModelMap model) {
     model.addAttribute("displayInfoId", displayInfoId);
+    
+    //예약일 랜덤 지정
+    LocalDateTime randomDate = LocalDateTime.now().plusDays((long) (Math.random()*6));
+    String randomDateText = randomDate.format(DateTimeFormatter.ofPattern("yyyy.MM.dd"));
+    model.addAttribute("randomDateText", randomDateText);
+    
     return "reserve";
   }
 
@@ -50,7 +58,7 @@ public class BookingController {
       @RequestParam(name = "reservationEmail", required = true) String reservationEmail,
       HttpSession session, RedirectAttributes redirectAttr) {
     // url에 잘못된 이메일 주소를 입력하여 접속한 경우
-    if ((int) reservationsService.getReservations(reservationEmail).get("size") == 0) {
+    if (reservationsService.getReservations(reservationEmail).getSize() == 0) {
       redirectAttr.addFlashAttribute("message", "wrong");
       return "redirect:bookinglogin";
     }

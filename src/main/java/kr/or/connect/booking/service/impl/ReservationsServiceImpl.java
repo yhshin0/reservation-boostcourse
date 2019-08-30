@@ -3,9 +3,7 @@ package kr.or.connect.booking.service.impl;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +17,7 @@ import kr.or.connect.booking.dao.ReservationsInfoDao;
 import kr.or.connect.booking.dto.FileInfo;
 import kr.or.connect.booking.dto.Reservation;
 import kr.or.connect.booking.dto.ReservationInfoPrice;
+import kr.or.connect.booking.dto.ReservationResponse;
 import kr.or.connect.booking.dto.ReservationUserComment;
 import kr.or.connect.booking.dto.ReservationUserCommentImage;
 import kr.or.connect.booking.dto.Reservations;
@@ -44,19 +43,18 @@ public class ReservationsServiceImpl implements ReservationsService {
 
 
   @Override
-  public Map<String, Object> getReservations(String reservationEmail) {
-    Map<String, Object> map = new HashMap<String, Object>();
+  public ReservationResponse getReservations(String reservationEmail) {
     List<ReservationsInfo> list = new ArrayList<ReservationsInfo>();
     list = reservationsInfoDao.selectByEmail(reservationEmail);
     for (ReservationsInfo info : list) {
-      int displayInfoId = info.getDisplayInfoId();
-      int reservationInfoId = info.getReservationInfoId();
-      info.setDisplayInfo(productDisplayInfoDao.selectOne(displayInfoId));
-      info.setTotalPrice(reservationsInfoDao.selectTotalPrice(reservationInfoId));
+      info.setDisplayInfo(productDisplayInfoDao.selectOne(info.getDisplayInfoId()));
+      info.setTotalPrice(reservationsInfoDao.selectTotalPrice(info.getReservationInfoId()));
     }
-    map.put("reservations", list);
-    map.put("size", list.size());
-    return map;
+    
+    ReservationResponse reservationResponse = new ReservationResponse();
+    reservationResponse.setReservations(list);
+    reservationResponse.setSize(list.size());
+    return reservationResponse;
   }
 
 

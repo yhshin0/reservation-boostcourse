@@ -1,11 +1,12 @@
 package kr.or.connect.booking.service;
 
-import java.util.Map;
+import kr.or.connect.booking.dto.ProductListResponse;
+import kr.or.connect.booking.dto.ProductResponse;
 
 public interface ProductsService {
   public static int LIMIT = 4;
 
-  public Map<String, Object> getItem(Integer displayInfoId);
+  public ProductResponse getProduct(Integer displayInfoId);
 
-  public Map<String, Object> getProductList(Integer categoryId, Integer start);
+  public ProductListResponse getProductList(Integer categoryId, Integer start);
 }

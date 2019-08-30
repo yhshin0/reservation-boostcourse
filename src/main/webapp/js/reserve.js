@@ -1,6 +1,5 @@
 function GetReservePage(displayInfoId) {
 	this.sendAjax(displayInfoId);
-	this.getReserveTime();
 	this.registerEvents();
 	this.itemMinimumCount = 0;
 	this.itemMaximumCount = 99999;
@@ -121,15 +120,6 @@ GetReservePage.prototype = {
 	// 선택한 티켓 가격 계산
 	calPrice : function(price, count, btn) {
 		btn.closest("div.count_control").querySelector("span.total_price").innerText = price*count;
-	},
-	
-	// 예약일 랜덤 지정
-	getReserveTime : function() {
-		var year = new Date().getFullYear();
-		var month = new Date().getMonth()+1;
-		var date = new Date().getDate() + Math.floor(Math.random()*5) + 1;
-		var reserveTime = year + '.' + month + '.' + date + '.';
-		document.querySelector("#reservationDate").innerText = reserveTime;
 	},
 	
 	// 이벤트 등록

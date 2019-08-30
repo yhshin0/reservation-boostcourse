@@ -1,10 +1,10 @@
 package kr.or.connect.booking.service;
 
-import java.util.Map;
+import kr.or.connect.booking.dto.ReservationResponse;
 import kr.or.connect.booking.dto.Reservations;
 
 public interface ReservationsService {
-  public Map<String, Object> getReservations(String reservationEmail);
+  public ReservationResponse getReservations(String reservationEmail);
 
   public int cancelReservation(int reservationInfoId);
 

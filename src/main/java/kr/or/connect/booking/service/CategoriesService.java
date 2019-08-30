@@ -1,8 +1,7 @@
 package kr.or.connect.booking.service;
 
-import java.util.List;
-import kr.or.connect.booking.dto.CategoryDetail;
+import kr.or.connect.booking.dto.CategoriesResponse;
 
 public interface CategoriesService {
-  public List<CategoryDetail> getItems();
+  public CategoriesResponse getCategories();
 }
