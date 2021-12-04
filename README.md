@@ -4,8 +4,11 @@
 
 ## 개발 환경
 언어: Java, JavaScript
+
 프레임워크: Spring framework
+
 DB: MySQL
+
 기타: MyBatis, HTML, CSS
 
 ## 주요 기능
